@@ -10,4 +10,4 @@ target_bin += boot/multiboot/multiboot.elf
 
 boot/multiboot/multiboot.elf: $(bbobjs) $(mbobjs)
 	$(CC) $(MBLDFLAGS) $(bbobjs) $(mbobjs) -o boot/multiboot/multiboot.elf
-
+	echo boot/multiboot/multiboot.elf is ready
