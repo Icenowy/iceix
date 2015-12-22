@@ -1,0 +1,2 @@
+*.o
+boot/multiboot/multiboot.elf
