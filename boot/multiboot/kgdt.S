@@ -3,10 +3,10 @@
 .global _gdt
 _gdt:
 	.quad 0x0000000000000000 # nil
-	.quad 0x00c09a0000001000 # kernel code segment (from 0x0, 16M)
-	.quad 0x00c0920000001000 # kernel data segment (from 0x0, 16M)
-	.quad 0x00cf9a000000ffff # kernel to userspace code segment (from 0x0, 4G)
-	.quad 0x00cf92000000ffff # kernel to userspace data segment (from 0x0, 4G)
+	.quad 0x00cf9a000000ffff # kernel code segment (from 0x0, 4G)
+	.quad 0x00cf92000000ffff # kernel data segment (from 0x0, 4G)
+	.quad 0x0000000000000000
+	.quad 0x0000000000000000
 	.quad 0x0000000000000000
 	.quad 0x0000000000000000
 	.quad 0x0000000000000000 # Reserved
