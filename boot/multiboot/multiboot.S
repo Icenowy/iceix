@@ -21,12 +21,15 @@ stack_top:
 .type _start, @function
 _start:
 	movl $stack_top, %esp
+
+	call _set_gdt
+
 	call kmain
 	
 	# This shouldn't occur, unless on a bare bone
 	cli
-	hlt
 _init_inf_loop:
+	hlt
 	jmp _init_inf_loop
 
 .size _start, . - _start

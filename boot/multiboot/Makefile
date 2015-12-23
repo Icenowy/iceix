@@ -1,6 +1,6 @@
 ASFLAGS = -ffreestanding -Og -Wall -Wextra $(EXTRA_ASFLAGS)
 
-mbobjs = boot/multiboot/multiboot.o
+mbobjs = boot/multiboot/multiboot.o boot/multiboot/kgdt.o
 
 objs += $(mbobjs)
 
