@@ -1,0 +1,7 @@
+#ifndef _ARCH_ADDRESS_H
+#define _ARCH_ADDRESS_H
+
+#define KERNEL_MEM_BASE 0xC0000000
+#define KERNEL_REAL_BASE 0x00100000
+
+#endif

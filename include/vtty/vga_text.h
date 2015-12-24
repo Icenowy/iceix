@@ -3,6 +3,9 @@
 
 #include <vtty/vtty.h>
 
+#include <arch/address.h>
+#include <arch/vga.h>
+
 #include <stdint.h>
 
 enum vga_text_color
@@ -46,6 +49,6 @@ static inline vga_text_entry_t vga_text_make_entry
 #define VGA_TEXT_HEIGHT 25
 
 /* Physical address */
-static vga_text_entry_t* const VGA_TEXT_VGABUF = (uint16_t *) 0xB8000;
+static vga_text_entry_t* const VGA_TEXT_VGABUF = (uint16_t *) VGA_MEM_TEXT_ADDRESS_VIRT;
 
 #endif
