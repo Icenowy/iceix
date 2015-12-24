@@ -6,6 +6,7 @@
 
 .section .multiboot_header # The header of multiboot specification
 .align 4
+_multiboot_header:
 .long MULTIBOOT_MAGIC
 .long MULTIBOOT_FLAGS
 .long MULTIBOOT_CHECKSUM
@@ -47,6 +48,14 @@ real_start:
 	movl %cr0, %ecx
 	orl $0x80000000, %ecx
 	movl %ecx, %cr0 # Enable Paging
+
+	movl $_higher_mem, %ecx
+	jmpl *%ecx
+
+_higher_mem:
+
+	movl $0x0, initial_pgd_top
+	invlpg 0x0
 
 	movl $stack_top, %esp
 
