@@ -2,25 +2,29 @@ ENTRY(_start)
 
 SECTIONS
 {
-	. = 1M;
 
-	.text BLOCK(4K) : ALIGN(4K)
+	KERNEL_MEM_BASE = 0xC0000000;
+	KERNEL_REAL_BASE = 0x00100000;
+
+	. = (KERNEL_MEM_BASE + KERNEL_REAL_BASE);
+
+	.text BLOCK(4K) : AT(ADDR(.text) - KERNEL_MEM_BASE)
 	{
 		*(.multiboot_header)
 		*(.text)
 	}
 
-	.rodata BLOCK(4K) : ALIGN(4K)
+	.rodata BLOCK(4K) : AT(ADDR(.rodata) - KERNEL_MEM_BASE)
 	{
 		*(.rodata)
 	}
 
-	.data BLOCK(4K) : ALIGN(4K)
+	.data BLOCK(4K) : AT(ADDR(.data) - KERNEL_MEM_BASE)
 	{
 		*(.data)
 	}
 
-	.bss BLOCK(4K) : ALIGN(4K)
+	.bss BLOCK(4K) : AT(ADDR(.bss) - KERNEL_MEM_BASE)
 	{
 		*(COMMON)
 		*(.bss)
