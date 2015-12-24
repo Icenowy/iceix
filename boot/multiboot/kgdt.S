@@ -1,4 +1,4 @@
-.section .rodata.gdt
+.section .data.gdt
 
 .global _gdt
 _gdt:
