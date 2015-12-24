@@ -1,6 +1,6 @@
-ASFLAGS = -ffreestanding -Og -Wall -Wextra $(EXTRA_ASFLAGS)
+ASFLAGS = -ffreestanding -Og -Wall -Wextra $(EXTRA_ASFLAGS) -I$(PWD)/include
 
-mbobjs = boot/multiboot/multiboot.o boot/multiboot/kgdt.o
+mbobjs = boot/multiboot/multiboot.o boot/multiboot/kgdt.o boot/multiboot/idt_asm.o boot/multiboot/idt.o boot/multiboot/vectors.o boot/multiboot/trap.o
 
 objs += $(mbobjs)
 
@@ -11,6 +11,9 @@ target_bin += boot/multiboot/multiboot.elf
 boot/multiboot/multiboot.elf: $(objs) boot/multiboot/multiboot.lds
 	$(CC) $(MBLDFLAGS) $(objs) -o boot/multiboot/multiboot.elf
 	@echo boot/multiboot/multiboot.elf is ready
+
+boot/multiboot/vectors.S: boot/multiboot/vectors.pl
+	perl boot/multiboot/vectors.pl > boot/multiboot/vectors.S
 
 qemu-mb-gdb: boot/multiboot/multiboot.elf
 	qemu-system-i386 -kernel boot/multiboot/multiboot.elf -s -S

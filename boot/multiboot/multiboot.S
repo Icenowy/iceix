@@ -61,6 +61,8 @@ _higher_mem:
 
 	call _set_gdt
 
+	call init_idt
+
 	call kmain
 	
 	# This shouldn't occur, unless on a bare bone
