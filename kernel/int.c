@@ -12,6 +12,7 @@ inline void mask_interrupt ()
 
 inline void allow_interrupt ()
 {
-	mask_count--;
+	if (mask_count > 0)
+		mask_count--;
 	if (! mask_count) arch_sti ();
 }
