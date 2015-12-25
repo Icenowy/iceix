@@ -30,3 +30,7 @@ __memcpy_fwd:
 1:	pop %edi
 	pop %esi
 	ret
+
+.global _vmemcpy
+_vmemcpy:
+	jmp memcpy

@@ -20,3 +20,7 @@ memmove:
 	pop %edi
 	pop %esi
 	ret
+
+.global _vmemmove
+_vmemmove:
+	jmp memmove

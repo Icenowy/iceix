@@ -4,11 +4,22 @@
 #include <arch/portio.h>
 #include <arch/vga.h>
 
+#include <string.h>
+
 static size_t cursor_pos;
 
 static vga_text_color_t color;
 
-static volatile vga_text_entry_t *buffer;
+static vga_text_entry_t *volatile buffer;
+
+static void vtty_scroll (size_t lines) {
+	mask_interrupt ();
+	if (lines >= VGA_TEXT_HEIGHT) lines = VGA_TEXT_HEIGHT;
+	size_t units = lines * VGA_TEXT_WIDTH;
+	_vmemmove (buffer, buffer+units, (VGA_TEXT_HEIGHT * VGA_TEXT_WIDTH) - units);
+	_vmemset (buffer + (VGA_TEXT_HEIGHT * VGA_TEXT_WIDTH) - units, 0, sizeof (vga_text_entry_t) * units);
+	allow_interrupt ();
+}
 
 static void vtty_update_cursor () {
 	mask_interrupt ();
@@ -31,18 +42,30 @@ void vtty_initialize (void) {
 	vtty_update_cursor ();
 }
 
+void vtty_newline () {
+	size_t line_number;
+	line_number = cursor_pos / VGA_TEXT_WIDTH + 1;
+	if (line_number >= VGA_TEXT_HEIGHT) {
+		vtty_scroll (line_number - VGA_TEXT_HEIGHT + 1);
+		line_number = VGA_TEXT_HEIGHT-1;
+	}
+	cursor_pos = line_number * VGA_TEXT_WIDTH;
+}
+
 void vtty_write (const void *buf, size_t nbyte) {
 	const char *cbuf = (const char *)buf;
-	size_t line_number;
 	for (size_t i = 0; i<nbyte; i++) {
 		switch (cbuf[i]) {
 		case '\n':
-			line_number = cursor_pos / VGA_TEXT_WIDTH;
-			cursor_pos = (line_number+1) * VGA_TEXT_WIDTH;
+			vtty_newline ();
 			break;
 		default:
 			mask_interrupt ();
 			buffer[cursor_pos++] = vga_text_make_entry (cbuf[i], color);
+			if (! (cursor_pos % VGA_TEXT_WIDTH)) {
+				cursor_pos--;
+				vtty_newline ();
+			}
 			allow_interrupt ();
 		}
 	}

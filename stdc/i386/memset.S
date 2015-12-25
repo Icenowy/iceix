@@ -74,3 +74,7 @@ memset:
 	sub %edx,%ecx
 	add %edx,%edi
 	jmp 1b
+
+.global _vmemset
+_vmemset:
+	jmp memset
