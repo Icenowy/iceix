@@ -2,6 +2,7 @@
 #include <arch/pic.h>
 #include <arch/int.h>
 #include <kernel/timer.h>
+#include <kernel/int.h>
 
 void kmain()
 {

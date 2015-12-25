@@ -1,6 +1,6 @@
 #include <vtty/vga_text.h>
 
-#include <arch/int.h>
+#include <kernel/int.h>
 #include <arch/portio.h>
 #include <arch/vga.h>
 

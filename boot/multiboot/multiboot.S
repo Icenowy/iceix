@@ -59,6 +59,8 @@ _higher_mem:
 
 	movl $stack_top, %esp
 
+	movl $1, mask_count
+
 	call _set_gdt
 
 	call init_idt

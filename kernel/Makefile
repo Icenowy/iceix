@@ -1,1 +1,1 @@
-objs += kernel/timer.o
+objs += kernel/timer.o kernel/int.o
