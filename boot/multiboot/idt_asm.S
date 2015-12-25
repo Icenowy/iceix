@@ -1,7 +1,7 @@
 #include <arch/address.h>
 
 .section .text
-.type install_idt, @function
+.globl install_idt
 install_idt:
 	lidt idt_desc
 	ret
