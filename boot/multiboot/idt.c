@@ -1,8 +1,7 @@
 #include <arch/idt.h>
 #include <arch/address.h>
+#include <arch/trap.h>
 #include <stdbool.h>
-
-#define IDT_LENGTH 256
 
 idt_gate_t idt_gates[IDT_LENGTH];
 
@@ -37,4 +36,5 @@ void init_idt ()
 		init_idt_item (i, * ( (&vectors) + i));
 	}
 	install_idt ();
+	init_trap ();
 }

@@ -62,4 +62,6 @@ typedef struct trapframe trapframe_t;
 
 extern idt_desc_t idt_desc;
 
+#define IDT_LENGTH 256
+
 #endif
