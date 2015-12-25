@@ -1,0 +1,1 @@
+objs += kernel/timer.o

@@ -12,10 +12,10 @@ static volatile vga_text_entry_t *buffer;
 
 static void vtty_update_cursor () {
 	mask_interrupt ();
-	outb (VGA_CRT_IC, 0x0f); // oprand for update LOW byte
-	outb (VGA_CRT_DC, (unsigned char) (cursor_pos & 0xFF));
 	outb (VGA_CRT_IC, 0x0e); // oprand for update HIGH byte
 	outb (VGA_CRT_DC, (unsigned char) ( (cursor_pos >> 8) & 0xFF));
+	outb (VGA_CRT_IC, 0x0f); // oprand for update LOW byte
+	outb (VGA_CRT_DC, (unsigned char) (cursor_pos & 0xFF));
 	allow_interrupt ();
 }
 

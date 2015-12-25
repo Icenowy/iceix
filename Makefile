@@ -10,7 +10,7 @@ all: boot/multiboot/multiboot.elf
 
 include barebone/Makefile
 include drivers/Makefile
-
+include kernel/Makefile
 include boot/multiboot/Makefile
 
 clean:
