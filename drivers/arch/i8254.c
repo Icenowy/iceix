@@ -3,6 +3,7 @@
 #include <arch/pic.h>
 #include <arch/trap.h>
 #include <arch/portio.h>
+#include <kernel/int.h>
 
 #define I8254_TICK 1193180
 
@@ -22,6 +23,8 @@ void arch_timer_init ()
 
 static void do_timer (struct trapframe *tf)
 {
+	mask_interrupt ();
 	jiffies++;
 	pic1_ready ();
+	allow_interrupt ();
 }
