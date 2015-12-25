@@ -65,7 +65,7 @@ _higher_mem:
 
 	call init_idt
 
-	call kmain
+	call arch_kmain
 	
 	# This shouldn't occur, unless on a bare bone
 	cli

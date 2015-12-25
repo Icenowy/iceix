@@ -23,6 +23,7 @@ void arch_timer_init ()
 
 static void do_timer (struct trapframe *tf)
 {
+	(void) tf;
 	mask_interrupt ();
 	jiffies++;
 	pic1_ready ();

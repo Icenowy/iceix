@@ -11,7 +11,7 @@ void install_idt ();
 
 extern void (*vectors) ();
 
-uint8_t traps[] = {};
+uint8_t traps[] = {0x80};
 
 void init_idt_item (uint8_t n, void (*function) ())
 {
