@@ -1,2 +1,3 @@
 *.o
 boot/multiboot/multiboot.elf
+boot/multiboot/vectors.S
