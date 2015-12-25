@@ -2,6 +2,6 @@
 void kmain()
 {
 	vtty_initialize ();
-	vtty_write ("Hello World\nfrom Iceix", 22);
+	vtty_write ("Merry Christmas!\n", 18);
 	for (;;) ;
 }
