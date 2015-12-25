@@ -23,10 +23,10 @@ static void vtty_scroll (size_t lines) {
 
 static void vtty_update_cursor () {
 	mask_interrupt ();
-	outb (VGA_CRT_IC, 0x0e); // oprand for update HIGH byte
-	outb (VGA_CRT_DC, (unsigned char) ( (cursor_pos >> 8) & 0xFF));
-	outb (VGA_CRT_IC, 0x0f); // oprand for update LOW byte
-	outb (VGA_CRT_DC, (unsigned char) (cursor_pos & 0xFF));
+	outb (0x0e, VGA_CRT_IC); // oprand for update HIGH byte
+	outb ((unsigned char) ( (cursor_pos >> 8) & 0xFF), VGA_CRT_DC);
+	outb (0x0f, VGA_CRT_IC); // oprand for update LOW byte
+	outb ((unsigned char) (cursor_pos & 0xFF), VGA_CRT_DC);
 	allow_interrupt ();
 }
 

@@ -10,7 +10,7 @@ void kmain()
 	current_jiffies = 0;
 	for (;;) {
 		if ((! (jiffies % HZ)) && jiffies > current_jiffies) {
-			vtty_write ("..........\n", 11);
+			vtty_write (".", 1);
 			current_jiffies = jiffies;
 		}
 	}
